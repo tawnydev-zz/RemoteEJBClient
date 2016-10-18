@@ -1,4 +1,4 @@
-package ejb.remote.stateless;
+package ejb.remote;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -25,7 +25,18 @@ public class RemoteEJBClient {
     	invokeStatefulBean();
     	invokeStatefulBean();
     }
- 
+
+    
+    private static Hashtable getJNDI(){
+    	final Hashtable jndiProperties = new Hashtable();
+        jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+        jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY, org.jboss.naming.remote.client.InitialContextFactory.class.getName());
+        jndiProperties.put(Context.PROVIDER_URL, "remote://localhost:4447");
+        jndiProperties.put(Context.SECURITY_PRINCIPAL, "manager");
+        jndiProperties.put(Context.SECURITY_CREDENTIALS, "tuyaux");
+        return jndiProperties;
+    }
+    
     /**
      * Looks up a stateless bean and invokes on it
      *
@@ -79,15 +90,6 @@ public class RemoteEJBClient {
         System.out.println("Dernière valeur de index="+statefulRemoteCounter.getCount());
     }
     
-    private static Hashtable getJNDI(){
-    	final Hashtable jndiProperties = new Hashtable();
-        jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-        jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY, org.jboss.naming.remote.client.InitialContextFactory.class.getName());
-        jndiProperties.put(Context.PROVIDER_URL, "remote://localhost:4447");
-        jndiProperties.put(Context.SECURITY_PRINCIPAL, "manager");
-        jndiProperties.put(Context.SECURITY_CREDENTIALS, "tuyaux");
-        return jndiProperties;
-    }
     /**
      * Looks up and remotes stateless calculator bean
      *
