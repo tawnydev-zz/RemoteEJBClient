@@ -182,6 +182,7 @@ public class RemoteEJBClient {
               }
            } catch (IOException ex) {
               System.out.println(ex.getMessage());
+              ex.printStackTrace();
            }
         }
      }
