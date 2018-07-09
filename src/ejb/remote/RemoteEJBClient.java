@@ -43,6 +43,10 @@ public class RemoteEJBClient {
         System.out.print("Options \n1. ajouter un livre\n2. Quitter \nEntrer le choix: ");
     }
     
+    /**
+     * Definit le JNDI pour la connexion au serveur EJB
+     * @return Hastable jndiProperties
+     */
     private static Hashtable getJNDI(){
     	final Hashtable jndiProperties = new Hashtable();
         jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
@@ -55,7 +59,7 @@ public class RemoteEJBClient {
     }
     
     /**
-     * Looks up a stateless bean and invokes on it
+     * Utilise un bean stateless pour du traitement de calcule
      *
      * @throws NamingException
      */
@@ -83,7 +87,7 @@ public class RemoteEJBClient {
     }
  
     /**
-     * Looks up a stateful bean and invokes on it
+     * Utilise un bean stateful pour du traitement de calcule
      *
      * @throws NamingException
      */
@@ -107,7 +111,7 @@ public class RemoteEJBClient {
     }
     
     /**
-     * Looks up and remotes stateless calculator bean
+     * Appelle un bean stateless et l'instancie
      *
      * @return
      * @throws NamingException
@@ -124,7 +128,7 @@ public class RemoteEJBClient {
     }
     
     /**
-     * Looks up and remotes stateful counter bean
+     * Appelle un bean stateful et l'instancie
      *
      * @return
      * @throws NamingException
